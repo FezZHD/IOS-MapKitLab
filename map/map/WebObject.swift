@@ -16,10 +16,22 @@ public class WeatherService{
     }
     
     
-    public func GetWeatherInfo(idArray: [Int]) -> [WeatherStats]{
+    var cityDictionary:[String: Int] = ["NY": 5106292, "Washington": 5549222, "Madison": 5229526, "Atlanta": 4180439];
+    
+    
+    public func GetWeatherArrayInfo() -> [WeatherStats]{
+        let token = GetToken();
+        print(token);
         
         
-
         return [WeatherStats]();
+    }
+    
+    
+    
+    private func GetToken() -> String{
+        let path = Bundle.main.path(forResource: "Info", ofType: "plist");
+        let dictionary = NSDictionary(contentsOfFile: path!);
+        return dictionary?.object(forKey: "ApiToken") as! String;
     }
 }

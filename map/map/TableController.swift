@@ -15,6 +15,11 @@ class TableController: UITableViewController {
     
     var weatherArray = [WeatherStats]();
     
+    var weatherService = WeatherService();
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,6 +44,14 @@ class TableController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         activityIndicator?.startAnimating();
+        DispatchQueue.global(qos: .utility).async {
+            
+            let temp = self.weatherService.GetWeatherArrayInfo();
+            
+            DispatchQueue.main.async {
+                self.activityIndicator?.stopAnimating();
+            }
+        }
     }
     
     @IBOutlet var navigation: UINavigationItem!
