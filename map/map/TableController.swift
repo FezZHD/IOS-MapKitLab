@@ -28,6 +28,8 @@ class TableController: UITableViewController {
         activityIndicator?.color = UIColor.blue;
         let barButton = UIBarButtonItem(customView: activityIndicator!)
         self.navigation.setRightBarButton(barButton, animated: true)
+        table.delegate=self;
+        table.dataSource=self;
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -41,15 +43,18 @@ class TableController: UITableViewController {
     }
 
     
+    @IBOutlet var table: UITableView!
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         activityIndicator?.startAnimating();
         DispatchQueue.global(qos: .utility).async {
             
-            let temp = self.weatherService.GetWeatherArrayInfo();
-            
-            DispatchQueue.main.async {
-                self.activityIndicator?.stopAnimating();
+            self.weatherService.getWeatherArrayInfo(){result in
+                self.weatherArray = result;
+                DispatchQueue.main.async {
+                    self.activityIndicator?.stopAnimating();
+                    self.table.reloadData();
+            };
             }
         }
     }
@@ -68,15 +73,18 @@ class TableController: UITableViewController {
         return weatherArray.count;
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableCell;
 
+        cell.city.text = weatherArray[indexPath.item].city;
+        cell.desc.text = weatherArray[indexPath.item].status;
+        cell.temp.text = String(format:"%.2f", weatherArray[indexPath.item].temp);
         // Configure the cell...
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

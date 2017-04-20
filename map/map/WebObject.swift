@@ -7,7 +7,8 @@
 //
 
 import Foundation
-
+import Alamofire
+import SwiftyJSON
 
 public class WeatherService{
 
@@ -19,19 +20,45 @@ public class WeatherService{
     var cityDictionary:[String: Int] = ["NY": 5106292, "Washington": 5549222, "Madison": 5229526, "Atlanta": 4180439];
     
     
-    public func GetWeatherArrayInfo() -> [WeatherStats]{
-        let token = GetToken();
+    public func getWeatherArrayInfo(complitionHandler: (([WeatherStats])->Void)){
+        let token = getToken();
         print(token);
-        
-        
-        return [WeatherStats]();
+        var count = 0;
+        let semaphore = DispatchSemaphore(value: 1);
+        var returnArray = [WeatherStats]();
+        for(city, cityId) in cityDictionary{
+            semaphore.wait();
+            count += 1;
+            let link = "http://api.openweathermap.org/data/2.5/weather?id=\(cityId)&appid=\(token)";
+            Alamofire.request(link, method: .get).responseString(completionHandler: {response in
+                if (response.result.isSuccess){
+                    returnArray.append(self.parseResult(jsonString: response.result.value!));
+                }
+                semaphore.signal();
+                count -= 1;
+            });
+        }
+        while (count > 0){
+        }
+        complitionHandler(returnArray);
     }
     
     
     
-    private func GetToken() -> String{
+    private func getToken() -> String{
         let path = Bundle.main.path(forResource: "Info", ofType: "plist");
         let dictionary = NSDictionary(contentsOfFile: path!);
         return dictionary?.object(forKey: "ApiToken") as! String;
+    }
+    
+    
+    private func parseResult(jsonString:String) -> WeatherStats{
+        let json:NSData = (jsonString as NSString).data(using:String.Encoding.utf8.rawValue)! as NSData
+        let parsedJson = JSON(json);
+        return WeatherStats(city: parsedJson["name"].string!,
+                            status: parsedJson["weather"].arrayValue[0]["main"].string!,
+                            temp: parsedJson["main"]["temp"].double!,
+                            lon: parsedJson["coord"]["lon"].double!,
+                            lat: parsedJson["coord"]["lat"].double!);
     }
 }
