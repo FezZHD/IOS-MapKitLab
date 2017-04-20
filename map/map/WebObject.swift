@@ -23,22 +23,17 @@ public class WeatherService{
     public func getWeatherArrayInfo(complitionHandler: (([WeatherStats])->Void)){
         let token = getToken();
         print(token);
-        var count = 0;
-        let semaphore = DispatchSemaphore(value: 1);
+        let semaphore = DispatchSemaphore(value: 0);
         var returnArray = [WeatherStats]();
         for(city, cityId) in cityDictionary{
-            semaphore.wait();
-            count += 1;
             let link = "http://api.openweathermap.org/data/2.5/weather?id=\(cityId)&appid=\(token)";
             Alamofire.request(link, method: .get).responseString(completionHandler: {response in
                 if (response.result.isSuccess){
                     returnArray.append(self.parseResult(jsonString: response.result.value!));
                 }
                 semaphore.signal();
-                count -= 1;
             });
-        }
-        while (count > 0){
+            semaphore.wait();
         }
         complitionHandler(returnArray);
     }
