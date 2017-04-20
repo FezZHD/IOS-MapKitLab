@@ -44,14 +44,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dS-aZ-fea">
-                                            <rect key="frame" x="20" y="19" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dS-aZ-fea">
+                                            <rect key="frame" x="20" y="8" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIE-1v-RfF">
-                                            <rect key="frame" x="20" y="58" width="42" height="21"/>
+                                            <rect key="frame" x="20" y="67" width="42" height="25"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -76,9 +76,10 @@
                                         <constraint firstItem="6dS-aZ-fea" firstAttribute="leading" secondItem="NBp-ny-3yG" secondAttribute="leadingMargin" constant="12" id="B4X-dL-A7z"/>
                                         <constraint firstItem="hGf-uU-LyS" firstAttribute="top" secondItem="NBp-ny-3yG" secondAttribute="topMargin" id="JB2-w3-Q3p"/>
                                         <constraint firstItem="hGf-uU-LyS" firstAttribute="leading" secondItem="36Z-ik-5aM" secondAttribute="trailing" constant="5" id="KzF-05-YiY"/>
-                                        <constraint firstItem="lIE-1v-RfF" firstAttribute="top" secondItem="6dS-aZ-fea" secondAttribute="bottom" constant="18" id="YXX-XE-FVU"/>
+                                        <constraint firstItem="lIE-1v-RfF" firstAttribute="top" secondItem="6dS-aZ-fea" secondAttribute="bottom" constant="38" id="YXX-XE-FVU"/>
                                         <constraint firstItem="36Z-ik-5aM" firstAttribute="top" secondItem="NBp-ny-3yG" secondAttribute="topMargin" constant="1" id="b3d-Kb-MC4"/>
-                                        <constraint firstItem="6dS-aZ-fea" firstAttribute="top" secondItem="NBp-ny-3yG" secondAttribute="topMargin" constant="11" id="dNf-86-dgj"/>
+                                        <constraint firstItem="6dS-aZ-fea" firstAttribute="top" secondItem="NBp-ny-3yG" secondAttribute="topMargin" id="dNf-86-dgj"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="lIE-1v-RfF" secondAttribute="bottom" id="iQM-BW-odo"/>
                                         <constraint firstItem="lIE-1v-RfF" firstAttribute="leading" secondItem="NBp-ny-3yG" secondAttribute="leadingMargin" constant="12" id="ysa-Sb-S3R"/>
                                     </constraints>
                                 </tableViewCellContentView>
