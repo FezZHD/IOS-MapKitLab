@@ -121,14 +121,23 @@ class TableController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+       
+        if (segue.identifier == "cityPush"){
+            let destVC = segue.destination as? MapController;
+            destVC?.hidesBottomBarWhenPushed = true;
+            let index = self.table.indexPathForSelectedRow?.row;
+            destVC?.currentWeather = self.weatherArray[index!];
+            destVC?.city = self.weatherArray[index!].city;
+            destVC?.desc = self.weatherArray[index!].status;
+            destVC?.temp = self.weatherArray[index!].temp;
+            destVC?.lat = self.weatherArray[index!].lat;
+            destVC?.lon = self.weatherArray[index!].lon;
+        }
     }
-    */
+    
 
 }
