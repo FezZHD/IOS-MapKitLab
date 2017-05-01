@@ -14,22 +14,17 @@ class MapController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var mapView: MKMapView!
     let regionRadius: CLLocationDistance = 100000;
-    var city:String = String();
-    var desc:String = String();
-    var temp:Double = Double();
-    var lon:Double = Double();
-    var lat:Double = Double();
     var currentWeather:WeatherStats!;
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationBar?.title = city;
-        let currentLocation = CLLocation(latitude: lat, longitude: lon);
+        self.navigationBar?.title = self.currentWeather.city;
+        let currentLocation = CLLocation(latitude: self.currentWeather.lat, longitude: self.currentWeather.lon);
         centerMap(location: currentLocation);
         let annotation = MKPointAnnotation();
-        annotation.title = city;
-        annotation.subtitle = "Current weather is : \(temp) °C"
-        annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        annotation.title = self.currentWeather.city;
+        annotation.subtitle = "Current weather is : \(String(format:"%.2f",self.currentWeather.temp)) °C"
+        annotation.coordinate = CLLocationCoordinate2D(latitude: self.currentWeather.lat, longitude: self.currentWeather.lon)
         mapView.delegate = self;
         mapView.addAnnotation(annotation);
         mapView.selectAnnotation(annotation, animated: true);

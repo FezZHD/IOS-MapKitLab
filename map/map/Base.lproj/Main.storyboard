@@ -141,12 +141,16 @@
         <!--Map-->
         <scene sceneID="3b9-yN-vPI">
             <objects>
-                <viewController title="Map" id="LFx-B7-76j" sceneMemberID="viewController">
+                <viewController title="Map" id="LFx-B7-76j" customClass="BigMapController" customModule="map" customModuleProvider="target" sceneMemberID="viewController">
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="C1W-cp-9UV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </mapView>
                     <navigationItem key="navigationItem" title="Map" id="ll4-ix-nbS"/>
+                    <connections>
+                        <outlet property="map" destination="C1W-cp-9UV" id="54a-bn-DiI"/>
+                        <outlet property="navigation" destination="ll4-ix-nbS" id="0fH-eh-9VM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k5Y-me-V9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
